@@ -1,0 +1,22 @@
+{
+  "name": "instaclone",
+  "version": "1.0.0",
+  "description": "server app instaclone",
+  "main": "index.js",
+  "author": "Cesaru",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon ./index.js"
+  },
+  "dependencies": {
+    "apollo-server": "^2.19.0",
+    "aws-sdk": "^2.817.0",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.8"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
