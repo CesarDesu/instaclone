@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Grid, Image } from "semantic-ui-react";
 import { useQuery } from "@apollo/client";
-import { GET_USER } from "../../gql/user";
-import userAuth from "../../hooks/useAuth";
-import UserNotFound from "../UserNotFound";
-import ModalBasic from "../Modal/ModalBasic";
-import AvatarForm from "../User/AvatarForm";
-import ImageNoFound from "../../assets/png/avatar.png";
+import { GET_USER } from "../../../gql/user";
+import userAuth from "../../../hooks/useAuth";
+import UserNotFound from "../../UserNotFound";
+import ModalBasic from "../../Modal/ModalBasic";
+import AvatarForm from "../AvatarForm";
+import HeaderProfile from "./HeaderProfile";
+import SettignsForm from "../SettignsForm";
+import ImageNoFound from "../../../assets/png/avatar.png";
 import "./Profile.scss";
 
 export default function Profile(props) {
@@ -28,16 +30,33 @@ export default function Profile(props) {
   if (error) return <UserNotFound />;
   const { getUser } = data;
 
-  console.log(getUser);
-
   const handlerModal = (type) => {
     switch (type) {
+      // avatar
       case "avatar":
         setTitleModal("Cambiar foto de perfil");
-        setChildrenModal(<AvatarForm setShowModal={setShowModal} />);
+        setChildrenModal(
+          <AvatarForm setShowModal={setShowModal} auth={auth} />
+        );
         setShowModal(true);
         break;
 
+      // settigns
+      case "settigns":
+        setTitleModal("");
+        setChildrenModal(
+          <SettignsForm
+            setShowModal={setShowModal}
+            setTitleModal={setTitleModal}
+            setChildrenModal={setChildrenModal}
+            getUser={getUser}
+            refetch={refetch}
+          />
+        );
+        setShowModal(true);
+        break;
+
+      // default
       default:
         break;
     }
@@ -54,7 +73,11 @@ export default function Profile(props) {
           />
         </Grid.Column>
         <Grid.Column width={11} className="profile__right">
-          <div>HeaderProfile</div>
+          <HeaderProfile
+            getUser={getUser}
+            auth={auth}
+            handlerModal={handlerModal}
+          />
           <div>Followers</div>
           <div className="other">
             <p className="name">{getUser.name}</p>

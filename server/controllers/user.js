@@ -65,24 +65,38 @@ async function getUser(id, username) {
   return user;
 }
 
-async function updateAvatar(file) {
+async function updateAvatar(file, ctx) {
+  const { id } = ctx.user;
   const { createReadStream, mimetype } = await file;
   const extension = mimetype.split("/")[1];
   console.log(extension);
-  const imageName = `avatar/avt.${extension}`;
+  const imageName = `avatar/${id}.${extension}`;
   const fileData = createReadStream();
 
   try {
     const result = await awsUploadImage(fileData, imageName);
-    console.log(result);
+    await User.findByIdAndUpdate(id, { avatar: result });
+    return {
+      status: true,
+      urlAvatar: result,
+    };
   } catch (error) {
     return {
       status: false,
       urlAvatar: null,
     };
   }
+}
 
-  return null;
+async function deleteAvatar(ctx) {
+  const { id } = ctx.user;
+  try {
+    await User.findByIdAndUpdate(id, { avatar: "" });
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
 }
 
 module.exports = {
@@ -90,4 +104,5 @@ module.exports = {
   login,
   getUser,
   updateAvatar,
+  deleteAvatar,
 };
