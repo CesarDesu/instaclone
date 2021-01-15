@@ -10,10 +10,15 @@ export default function HeaderProfile(props) {
   return (
     <div className="header-profile">
       <h2>{getUser.username}</h2>
-      {getUser.username === auth.username ? (
+      {/* {getUser.username === auth.username ? (
         <Button onClick={() => handlerModal("settigns")}>Ajustes</Button>
       ) : (
         !loading && buttonFollow()
+      )} */}
+      {getUser.username === auth.username ? (
+        <Button onClick={() => handlerModal("settigns")}>Ajustes</Button>
+      ) : (
+        <Button>Seguir</Button>
       )}
     </div>
   );

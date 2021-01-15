@@ -49,8 +49,8 @@ export default function Profile(props) {
             setShowModal={setShowModal}
             setTitleModal={setTitleModal}
             setChildrenModal={setChildrenModal}
-            getUser={getUser}
-            refetch={refetch}
+            // getUser={getUser}
+            // refetch={refetch}
           />
         );
         setShowModal(true);
