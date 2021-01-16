@@ -5,6 +5,8 @@ import { useApolloClient } from '@apollo/client';
 import useAuth from '../../../hooks/useAuth';
 import PasswordForm from '../PasswordForm';
 import EmailForm from '../EmailForm';
+import DescriptionForm from '../DescriptionForm';
+import SiteWebForm from '../SiteWebForm';
 import './SettignsForm.scss';
 
 export default function SettignsForm(props) {
@@ -19,11 +21,13 @@ export default function SettignsForm(props) {
   const client = useApolloClient();
   const { logout } = useAuth();
 
+  // Change Password
   const onChangePassoword = () => {
     setTitleModal('Cambiar tu contraseña');
     setChildrenModal(<PasswordForm logout={onLogout} />);
   };
 
+  // Change Email
   const onChangeEmail = () => {
     setTitleModal('Cambiar email');
     setChildrenModal(
@@ -35,6 +39,31 @@ export default function SettignsForm(props) {
     );
   };
 
+  // Change Description
+  const onChangeDescription = () => {
+    setTitleModal('Actualizar tu biografía');
+    setChildrenModal(
+      <DescriptionForm
+        setShowModal={setShowModal}
+        currentDescription={getUser.description}
+        refetch={refetch}
+      />
+    );
+  };
+
+  //Change Website
+  const onChangeSiteWeb = () => {
+    setTitleModal('Actualizar sitio web');
+    setChildrenModal(
+      <SiteWebForm
+        setShowModal={setShowModal}
+        currentSiteWeb={getUser.siteWeb}
+        refetch={refetch}
+      />
+    );
+  };
+
+  // Logout
   const onLogout = () => {
     client.clearStore();
     logout();
@@ -45,8 +74,8 @@ export default function SettignsForm(props) {
     <div className="settigns-form">
       <Button onClick={onChangePassoword}>Cambiar contraseña</Button>
       <Button onClick={onChangeEmail}>Cambiar email</Button>
-      {/* <Button onClick={onChangeDescription}>Descripción</Button>
-      <Button onClick={onChangeSiteWeb}>Sitio web</Button> */}
+      <Button onClick={onChangeDescription}>Descripción</Button>
+      <Button onClick={onChangeSiteWeb}>Sitio web</Button>
       <Button onClick={onLogout}>Cerrar sesión</Button>
       <Button onClick={() => setShowModal(false)}>Cancelar</Button>
     </div>

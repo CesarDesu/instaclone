@@ -83,7 +83,7 @@ export default function Profile(props) {
             <p className="name">{getUser.name}</p>
             {getUser.siteWeb && (
               <a
-                href={getUser.siteWeb}
+                href={'//' + getUser.siteWeb}
                 className="siteWeb"
                 target="_blank"
                 rel="noopener noreferrer"
