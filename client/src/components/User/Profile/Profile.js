@@ -1,26 +1,26 @@
-import React, { useState } from "react";
-import { Grid, Image } from "semantic-ui-react";
-import { useQuery } from "@apollo/client";
-import { GET_USER } from "../../../gql/user";
-import userAuth from "../../../hooks/useAuth";
-import UserNotFound from "../../UserNotFound";
-import ModalBasic from "../../Modal/ModalBasic";
-import AvatarForm from "../AvatarForm";
-import HeaderProfile from "./HeaderProfile";
-import SettignsForm from "../SettignsForm";
-import ImageNoFound from "../../../assets/png/avatar.png";
-import "./Profile.scss";
+import React, { useState } from 'react';
+import { Grid, Image } from 'semantic-ui-react';
+import { useQuery } from '@apollo/client';
+import { GET_USER } from '../../../gql/user';
+import userAuth from '../../../hooks/useAuth';
+import UserNotFound from '../../UserNotFound';
+import ModalBasic from '../../Modal/ModalBasic';
+import AvatarForm from '../AvatarForm';
+import HeaderProfile from './HeaderProfile';
+import SettignsForm from '../SettignsForm';
+import ImageNoFound from '../../../assets/png/avatar.png';
+import './Profile.scss';
 
 export default function Profile(props) {
   const { username } = props;
 
   const [showModal, setShowModal] = useState(false);
-  const [titleModal, setTitleModal] = useState("");
+  const [titleModal, setTitleModal] = useState('');
   const [childrenModal, setChildrenModal] = useState(null);
 
   const { auth } = userAuth();
 
-  const { data, loading, error } = useQuery(GET_USER, {
+  const { data, loading, error, refetch } = useQuery(GET_USER, {
     variables: {
       username,
     },
@@ -33,8 +33,8 @@ export default function Profile(props) {
   const handlerModal = (type) => {
     switch (type) {
       // avatar
-      case "avatar":
-        setTitleModal("Cambiar foto de perfil");
+      case 'avatar':
+        setTitleModal('Cambiar foto de perfil');
         setChildrenModal(
           <AvatarForm setShowModal={setShowModal} auth={auth} />
         );
@@ -42,15 +42,15 @@ export default function Profile(props) {
         break;
 
       // settigns
-      case "settigns":
-        setTitleModal("");
+      case 'settigns':
+        setTitleModal('');
         setChildrenModal(
           <SettignsForm
             setShowModal={setShowModal}
             setTitleModal={setTitleModal}
             setChildrenModal={setChildrenModal}
-            // getUser={getUser}
-            // refetch={refetch}
+            getUser={getUser}
+            refetch={refetch}
           />
         );
         setShowModal(true);
@@ -69,7 +69,7 @@ export default function Profile(props) {
           <Image
             src={getUser.avatar ? getUser.avatar : ImageNoFound}
             avatar
-            onClick={() => username === auth.username && handlerModal("avatar")}
+            onClick={() => username === auth.username && handlerModal('avatar')}
           />
         </Grid.Column>
         <Grid.Column width={11} className="profile__right">
