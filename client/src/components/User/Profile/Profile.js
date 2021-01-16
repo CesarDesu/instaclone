@@ -8,6 +8,7 @@ import ModalBasic from '../../Modal/ModalBasic';
 import AvatarForm from '../AvatarForm';
 import HeaderProfile from './HeaderProfile';
 import SettignsForm from '../SettignsForm';
+import Followers from './Followers';
 import ImageNoFound from '../../../assets/png/avatar.png';
 import './Profile.scss';
 
@@ -78,7 +79,10 @@ export default function Profile(props) {
             auth={auth}
             handlerModal={handlerModal}
           />
-          <div>Followers</div>
+          <Followers
+            username={username}
+            //totalPublications={totalPublications}
+          />
           <div className="other">
             <p className="name">{getUser.name}</p>
             {getUser.siteWeb && (
