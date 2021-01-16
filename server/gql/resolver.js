@@ -1,9 +1,10 @@
-const userController = require("../controllers/user");
+const userController = require('../controllers/user');
 
 const resolvers = {
   Query: {
     // User
     getUser: (_, { id, username }) => userController.getUser(id, username),
+    search: (_, { search }) => userController.search(search),
   },
 
   Mutation: {
