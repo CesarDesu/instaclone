@@ -1,5 +1,6 @@
 const userController = require('../controllers/user');
 const followController = require('../controllers/follow');
+const publicationController = require('../controllers/publication');
 
 const resolvers = {
   Query: {
@@ -13,6 +14,8 @@ const resolvers = {
     getFollowers: (_, { username }) => followController.getFollowers(username),
     getFolloweds: (_, { username }) => followController.getFolloweds(username),
     getNotFolloweds: (_, {}, ctx) => followController.getNotFolloweds(ctx),
+
+    // Publication
   },
 
   Mutation: {
@@ -27,6 +30,9 @@ const resolvers = {
     follow: (_, { username }, ctx) => followController.follow(username, ctx),
     unFollow: (_, { username }, ctx) =>
       followController.unFollow(username, ctx),
+
+    // Publication
+    publish: (_, { file }, ctx) => publicationController.publish(file, ctx),
   },
 };
 
