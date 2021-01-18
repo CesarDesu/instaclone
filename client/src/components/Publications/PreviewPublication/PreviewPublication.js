@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Image } from 'semantic-ui-react';
-import ModalPublication from '../../Modal/ModalPublication';
-import './PreviewPublication.scss';
+import React, { useState } from "react";
+import { Image } from "semantic-ui-react";
+import ModalPublication from "../../Modal/ModalPublication";
+import "./PreviewPublication.scss";
 
 export default function PreviewPublication(props) {
   const { publication } = props;

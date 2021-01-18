@@ -18,7 +18,7 @@ export default function LoginForm() {
     validationSchema: Yup.object({
       email: Yup.string()
         .email("El email no es valido")
-        .required("El email es obligatorio"),
+        .required("El emial es obligatorio"),
       password: Yup.string().required("La contraseña es obligatorio"),
     }),
     onSubmit: async (formData) => {

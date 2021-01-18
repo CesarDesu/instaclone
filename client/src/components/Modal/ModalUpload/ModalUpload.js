@@ -1,10 +1,10 @@
-import React, { useState, useCallback } from 'react';
-import { Modal, Icon, Button, Dimmer, Loader } from 'semantic-ui-react';
-import { toast } from 'react-toastify';
-import { useDropzone } from 'react-dropzone';
-import { useMutation } from '@apollo/client';
-import { PUBLISH } from '../../../gql/publication';
-import './ModalUpload.scss';
+import React, { useState, useCallback } from "react";
+import { Modal, Icon, Button, Dimmer, Loader } from "semantic-ui-react";
+import { toast } from "react-toastify";
+import { useDropzone } from "react-dropzone";
+import { useMutation } from "@apollo/client";
+import { PUBLISH } from "../../../gql/publication";
+import "./ModalUpload.scss";
 
 export default function ModalUpload(props) {
   const { show, setShow } = props;
@@ -15,14 +15,14 @@ export default function ModalUpload(props) {
   const onDrop = useCallback((acceptedFile) => {
     const file = acceptedFile[0];
     setFileUpload({
-      type: 'image',
+      type: "image",
       file,
       preview: URL.createObjectURL(file),
     });
   });
 
   const { getRootProps, getInputProps } = useDropzone({
-    accept: 'image/jpeg, image/png',
+    accept: "image/jpeg, image/png",
     noKeyboard: true,
     multiple: false,
     onDrop,
@@ -42,10 +42,10 @@ export default function ModalUpload(props) {
           file: fileUpload.file,
         },
       });
-
       const { data } = result;
+
       if (!data.publish.status) {
-        toast.warning('Error en la publicación');
+        toast.warning("Error en la publicación");
         isLoading(false);
       } else {
         onClose();
@@ -70,11 +70,12 @@ export default function ModalUpload(props) {
         )}
         <input {...getInputProps()} />
       </div>
-      {fileUpload?.type === 'image' && (
+
+      {fileUpload?.type === "image" && (
         <div
           className="image"
           style={{ backgroundImage: `url("${fileUpload.preview}")` }}
-        ></div>
+        />
       )}
 
       {fileUpload && (

@@ -42,6 +42,14 @@ const typeDefs = gql`
     createAt: String
   }
 
+  type FeedPublication {
+    id: ID
+    idUser: User
+    file: String
+    typeFile: String
+    createAt: String
+  }
+
   input UserInput {
     name: String!
     username: String!
@@ -81,9 +89,14 @@ const typeDefs = gql`
 
     # Publication
     getPublications(username: String!): [Publication]
+    getPublicationsFolloweds: [FeedPublication]
 
     # Comment
     getComments(idPublication: ID!): [Comment]
+
+    # Like
+    isLike(idPublication: ID!): Boolean
+    countLikes(idPublication: ID!): Int
   }
 
   type Mutation {
@@ -103,6 +116,10 @@ const typeDefs = gql`
 
     # Comment
     addComment(input: CommentInput): Comment
+
+    # Like
+    addLike(idPublication: ID!): Boolean
+    deleteLike(idPublication: ID!): Boolean
   }
 `;
 

@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const PUBLISH = gql`
   mutation publish($file: Upload) {
@@ -16,6 +16,23 @@ export const GET_PUBLICATIONS = gql`
       idUser
       file
       typeFile
+    }
+  }
+`;
+
+export const GET_PUBLICATIONS_FOLLOWEDS = gql`
+  query getPublicationsFolloweds {
+    getPublicationsFolloweds {
+      id
+      idUser {
+        username
+        name
+        email
+        avatar
+      }
+      file
+      typeFile
+      createAt
     }
   }
 `;

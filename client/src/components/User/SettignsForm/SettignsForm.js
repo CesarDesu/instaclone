@@ -1,13 +1,13 @@
-import React from 'react';
-import { Button } from 'semantic-ui-react';
-import { useHistory } from 'react-router-dom';
-import { useApolloClient } from '@apollo/client';
-import useAuth from '../../../hooks/useAuth';
-import PasswordForm from '../PasswordForm';
-import EmailForm from '../EmailForm';
-import DescriptionForm from '../DescriptionForm';
-import SiteWebForm from '../SiteWebForm';
-import './SettignsForm.scss';
+import React from "react";
+import { Button } from "semantic-ui-react";
+import { useHistory } from "react-router-dom";
+import { useApolloClient } from "@apollo/client";
+import useAuth from "../../../hooks/useAuth";
+import PasswordForm from "../PasswordForm";
+import EmailForm from "../EmailForm";
+import DescriptionForm from "../DescriptionForm";
+import SiteWebForm from "../SiteWebForm";
+import "./SettignsForm.scss";
 
 export default function SettignsForm(props) {
   const {
@@ -21,15 +21,13 @@ export default function SettignsForm(props) {
   const client = useApolloClient();
   const { logout } = useAuth();
 
-  // Change Password
   const onChangePassoword = () => {
-    setTitleModal('Cambiar tu contraseña');
+    setTitleModal("Cambiar tu contraseña");
     setChildrenModal(<PasswordForm logout={onLogout} />);
   };
 
-  // Change Email
   const onChangeEmail = () => {
-    setTitleModal('Cambiar email');
+    setTitleModal("Cambiar email");
     setChildrenModal(
       <EmailForm
         setShowModal={setShowModal}
@@ -39,9 +37,8 @@ export default function SettignsForm(props) {
     );
   };
 
-  // Change Description
   const onChangeDescription = () => {
-    setTitleModal('Actualizar tu biografía');
+    setTitleModal("Actualizar tu biografía");
     setChildrenModal(
       <DescriptionForm
         setShowModal={setShowModal}
@@ -51,9 +48,8 @@ export default function SettignsForm(props) {
     );
   };
 
-  //Change Website
   const onChangeSiteWeb = () => {
-    setTitleModal('Actualizar sitio web');
+    setTitleModal("Actualizar sitio web");
     setChildrenModal(
       <SiteWebForm
         setShowModal={setShowModal}
@@ -63,11 +59,10 @@ export default function SettignsForm(props) {
     );
   };
 
-  // Logout
   const onLogout = () => {
     client.clearStore();
     logout();
-    history.push('/');
+    history.push("/");
   };
 
   return (

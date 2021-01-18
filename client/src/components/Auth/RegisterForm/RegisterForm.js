@@ -36,7 +36,7 @@ export default function RegisterForm(props) {
         const newUser = formData;
         delete newUser.repeatPassword;
 
-        const result = await register({
+        await register({
           variables: {
             input: newUser,
           },
@@ -75,8 +75,8 @@ export default function RegisterForm(props) {
         <Form.Input
           type="text"
           placeholder="Correo electronico"
-          value={formik.values.email}
           name="email"
+          value={formik.values.email}
           onChange={formik.handleChange}
           error={formik.errors.email && true}
         />

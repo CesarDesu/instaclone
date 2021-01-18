@@ -1,13 +1,12 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const PublicationSchema = Schema({
   idUser: {
     type: mongoose.Schema.Types.ObjectId,
     require: true,
-    ref: 'User',
+    ref: "User",
   },
-  // url del file
   file: {
     type: String,
     trim: true,
@@ -23,4 +22,4 @@ const PublicationSchema = Schema({
   },
 });
 
-module.exports = mongoose.model('Publication', PublicationSchema);
+module.exports = mongoose.model("Publication", PublicationSchema);

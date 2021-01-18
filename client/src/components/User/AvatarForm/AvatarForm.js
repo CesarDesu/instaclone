@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { useMutation } from "@apollo/client";
 import { UPDATE_AVATAR, GET_USER, DELETE_AVATAR } from "../../../gql/user";
 import "./AvatarForm.scss";
+import AuthContext from "../../../context/AuthContext";
 
 export default function AvatarForm(props) {
   const { setShowModal, auth } = props;
@@ -50,8 +51,8 @@ export default function AvatarForm(props) {
     try {
       setLoading(true);
       const result = await updateAvatar({ variables: { file } });
-
       const { data } = result;
+      console.log(result);
       if (!data.updateAvatar.status) {
         toast.warning("Error al actualizar el avatar");
         setLoading(false);

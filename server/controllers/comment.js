@@ -1,4 +1,4 @@
-const Comment = require('../models/comment');
+const Comment = require("../models/comment");
 
 function addComment(input, ctx) {
   try {
@@ -15,7 +15,7 @@ function addComment(input, ctx) {
 }
 
 async function getComments(idPublication) {
-  const result = await Comment.find({ idPublication }).populate('idUser');
+  const result = await Comment.find({ idPublication }).populate("idUser");
   return result;
 }
 

@@ -1,7 +1,8 @@
-const userController = require('../controllers/user');
-const followController = require('../controllers/follow');
-const publicationController = require('../controllers/publication');
-const commentController = require('../controllers/comment');
+const userController = require("../controllers/user");
+const followController = require("../controllers/follow");
+const publicationController = require("../controllers/publication");
+const commentController = require("../controllers/comment");
+const likeController = require("../controllers/like");
 
 const resolvers = {
   Query: {
@@ -19,12 +20,19 @@ const resolvers = {
     // Publication
     getPublications: (_, { username }) =>
       publicationController.getPublications(username),
+    getPublicationsFolloweds: (_, {}, ctx) =>
+      publicationController.getPublicationsFolloweds(ctx),
 
     // Comment
     getComments: (_, { idPublication }) =>
       commentController.getComments(idPublication),
-  },
 
+    // Like
+    isLike: (_, { idPublication }, ctx) =>
+      likeController.isLike(idPublication, ctx),
+    countLikes: (_, { idPublication }) =>
+      likeController.countLikes(idPublication),
+  },
   Mutation: {
     // User
     register: (_, { input }) => userController.register(input),
@@ -43,6 +51,12 @@ const resolvers = {
 
     // Comment
     addComment: (_, { input }, ctx) => commentController.addComment(input, ctx),
+
+    // Like
+    addLike: (_, { idPublication }, ctx) =>
+      likeController.addLike(idPublication, ctx),
+    deleteLike: (_, { idPublication }, ctx) =>
+      likeController.deleteLike(idPublication, ctx),
   },
 };
 

@@ -1,10 +1,10 @@
-import React from 'react';
-import { Form, Button } from 'semantic-ui-react';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import { useMutation } from '@apollo/client';
-import { ADD_COMMENT } from '../../../../gql/comment';
-import './CommentForm.scss';
+import React from "react";
+import { Form, Button } from "semantic-ui-react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { useMutation } from "@apollo/client";
+import { ADD_COMMENT } from "../../../../gql/comment";
+import "./CommentForm.scss";
 
 export default function CommentForm(props) {
   const { publication } = props;
@@ -12,7 +12,7 @@ export default function CommentForm(props) {
 
   const formik = useFormik({
     initialValues: {
-      comment: '',
+      comment: "",
     },
     validationSchema: Yup.object({
       comment: Yup.string().required(),
